@@ -1,0 +1,20 @@
+h1 {
+    color: rebeccapurple;
+    font-size: 32px;
+    font-family: "Roboto";
+    margin:1cm; 
+    padding: 10px;
+    background-color:bisque;
+    text-align: center
+}
+body {
+    background-color: thistle;
+    color: red;
+}
+p#yellowparagraph {
+    color: yellow;
+}
+rect.square {
+    height: 150px;
+    width:100px
+}
