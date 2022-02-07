@@ -1,9 +1,18 @@
 svg {
     height:500px;
-    Width:100%;
-    background-color:lemonchiffon
+    Width:1000px;
+    background-color:lemonchiffon;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
+body{
+    background-color: black;
+}
+h1{
+    text-align: center;
+    color: white;
+}
 circle#C1 {
     r:100px;
     cx:150px;
