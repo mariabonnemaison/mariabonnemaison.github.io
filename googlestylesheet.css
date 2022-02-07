@@ -1,0 +1,164 @@
+svg {
+    height:500px;
+    Width:100%;
+    background-color:lemonchiffon
+}
+
+circle#C1 {
+    r:100px;
+    cx:150px;
+    cy:150px;
+    fill: black
+}
+
+circle#C2{
+    r: 90px;
+    cx: 150px;
+    cy: 150px;
+    fill: white
+}
+
+circle#C3{
+    r: 80px;
+    cx:150px;
+    cy:150px;
+    fill:black
+}
+
+Circle#C4{
+    r:50px;
+    cx:150px;
+    cy:150px;
+    fill:steelblue
+}
+
+circle#C5{
+    r:40px;
+    cx:150px;
+    cy:150px;
+    fill:black
+
+}
+circle#C6{
+    r:30px;
+    cx:150px;
+    cy:150px;
+    fill: darkcyan
+}
+
+circle#C7{
+    r:25px;
+    cx:150px;
+    cy:150px;
+    fill: black
+}
+circle#C8{
+    r: 50px;
+    cx: 300px;
+    cy:270px;
+    stroke:black;
+    stroke-width: 3;
+    fill: red
+
+
+}
+circle#C9{
+    r: 45px;
+    cx: 300px;
+    cy:270px;
+    fill: white;
+}
+
+circle#C10{
+    r: 50px;
+    cx: 400px;
+    cy:245px;
+    stroke:black;
+    stroke-width: 3;
+    fill: rgb(255, 202, 103);
+    
+
+}
+circle#C11{
+    r: 45px;
+    cx: 400px;
+    cy:245px;
+    fill: white;
+}
+
+circle#C12{
+    r: 30px;
+    cx: 307px;
+    cy:305px;
+    stroke:black;
+    stroke-width: 3;
+    fill: rgb(255, 94, 0);
+    
+
+}
+circle#C13{
+    r: 25px;
+    cx: 307px;
+    cy:305px;
+    fill: white;
+}
+
+circle#C14{
+    r: 30px;
+    cx: 367px;
+    cy:289px;
+    stroke:black;
+    stroke-width: 3;
+    fill: rgb(255, 202, 103);
+    
+
+}
+circle#C15{
+    r: 25px;
+    cx: 367px;
+    cy:289px;
+    fill: white;
+}
+
+circle#C16{
+    r: 30px;
+    cx: 426px;
+    cy:275px;
+    stroke:black;
+    stroke-width: 3;
+    fill: rgb(255, 233, 108);
+    
+
+}
+circle#C17{
+    r: 25px;
+    cx: 426px;
+    cy:275px;
+    fill: white;
+}
+
+rect#clip{
+    height: 100px;
+    width: 320px;
+    x: 102px;
+    y: 340px;
+    transform: rotate(346deg);
+    fill: lemonchiffon
+}
+polygon#triangle{
+    fill: slateblue;
+    stroke: black;
+    stroke-width: 3px;
+}
+
+circle#C18 {
+    r: 60px;
+    cx: 736px;
+    cy: 190px;
+    fill:turquoise;
+    opacity:0.5;
+    stroke-width: 2;
+    stroke:black
+
+
+}
