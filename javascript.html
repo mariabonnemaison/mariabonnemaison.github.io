@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JavaScript Functions</title>
+  </head>
+  <h1 style= "text-align: center">JavaScript Functions</h1> 
+<body style="text-align: center;">
+  <p>I left class early for Beanpot... Sorry Dave. I'm not entirely sure if this is what you asked for, so let's find out!</p>
+  <p>Please answer the following questions.</p>
+
+  <h3 id="question">10+10= ?</h3>
+
+  <button onclick= "Answer()"> Answer</button>
+
+<script> 
+  var solution= document.getElementById("question");
+
+  function Answer() {
+  solution.innerHTML = "10+10= 20";
+  }
+</script>
+
+  <h3>Did I do this right?</h3>
+  <button onclick= "Yes()">Yes</button> <button onclick= "No()">No</button>
+  <p id="yes"></p> <p id="no"></p>
+
+
+<script>
+  var yes= document.getElementById("yes");
+  var no =document.getElementById("no");
+
+  function Yes(){
+    yes.innerHTML = "Awesome!";
+  }
+  function No(){
+    no.innerHTML = "Awkward...";
+  }
+  
+</script>
+
+</body>
+</html>

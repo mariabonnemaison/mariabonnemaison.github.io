@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JavaScript Test</title>
+    <h1 id="name"></h1>
+  </head>
+<body>
+<script>
+
+    var myNumber = 42;
+
+    //numbers
+    myNumber = myNumber + 10;
+    console.log(myNumber, myNumber/2);
+    
+    //string
+    var myString = "Javascript is cool";
+    console.log("D3 and " +myString);
+    
+    //boolean
+    var bigNumber = myNumber >100;
+    console.log(bigNumber);
+
+// Shortcut: command+ /
+
+// array
+
+var myArray = ["one", "two", "three", "four"];
+
+// Any line starting with double slashes is a comment
+// that will not be interpreted by the browser.
+
+// This should print out "two"
+console.log(myArray[1]);
+
+// object variables
+var user = {
+    name: "Dave",
+    color: "red",
+    height: 72,
+    dog: "Lucy",
+    favoriteNumber: myNumber};
+
+    console.log(user.name);
+
+// functions
+  var sayHello = function(name) {
+    console.log("Hello "+ name + "!");
+  }
+
+  sayHello("Jovi");
+
+// Function Variables
+var sayText = function(txt) {
+    console.log(txt);
+  }
+
+  sayText("Goodbye");
+// Function return
+  var plusTen = function(num) {
+    return num + 10;
+  }
+
+  var thirty = plusTen(20);
+
+  console.log(thirty);
+
+  // conditional statement
+  var myNumber = 12;
+
+  if (myNumber > 10) {
+    console.log("greater than 10!");
+  }
+  else {
+    console.log("less than 10!");
+  }
+  // combining everything
+
+  function greaterThanTen(num) {
+
+if (num > 10) {
+  console.log("greater than 10!");
+}
+else {
+  console.log("less than 10!");
+}
+
+return num > 10;
+
+}
+
+// this should return true
+console.log(greaterThanTen(20));
+
+
+
+// interacting with HTML
+
+
+document.getElementById("name").innerHTML = "Dave";
+
+src="math.js"
+</script>  
+
+</body>
