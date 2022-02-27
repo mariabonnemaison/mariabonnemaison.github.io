@@ -10,6 +10,8 @@
     <svg id="Canvas"> </svg>
     
     <script>
+
+      // Most streamed artists on Spotify. Value is streams in billions
        var Men= [
             {
                 artist:"Drake",
@@ -58,7 +60,7 @@
             }
         ]
 
-        
+
         d3.select("#title")
         .attr("class","big")
         .style("color","cornflowerblue");
@@ -66,7 +68,7 @@
         // changes in bulk
         d3.selectAll(".big").style("color", "cornflowerblue");
 
-        function drawrect(dataArray){
+function drawrect(dataArray){
 
 // data binding
 var rectangles= d3.select("#Canvas")
@@ -109,7 +111,7 @@ rectangles.exit()
 
 };
 
-drawCircles(Men);
+drawrect(Men);
 
   
 
