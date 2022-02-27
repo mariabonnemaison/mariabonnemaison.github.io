@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Feb 14 Homework</title>
+  </head>
+  <body>
+    <h1 id="title">Most Streamed Artists on Spotify</h1>
+    <svg id="Canvas"> </svg>
+    
+    <script>
+       var Men= [
+            {
+                artist:"Drake",
+                value: 45
+            },
+            {
+              artist: "Ed Sheeran",
+              value:34
+
+            },
+            {
+              artist: "Bad Bunny",
+              value: 	32
+            },
+            {
+              artist: "The Weeknd",
+              value: 30
+            },
+            {
+              artist: "justin Bieber",
+              value: 29
+            }
+            
+        ]
+        var women=[
+        {
+              artist: "Ariana Grande",
+              value: 30
+            },
+            {
+              artist: "Taylor Swift",
+              value:27
+            },
+            {
+              artist: "Billie Eilish",
+              value: 21
+            },
+            {
+              artist: "Dua Lipa",
+              value: 19
+            },
+
+            {
+              artist: "Rihanna",
+              value: 19
+            }
+        ]
+
+        
+        d3.select("#title")
+        .attr("class","big")
+        .style("color","cornflowerblue");
+    
+        // changes in bulk
+        d3.selectAll(".big").style("color", "cornflowerblue");
+
+        function drawrect(dataArray){
+
+// data binding
+var rectangles= d3.select("#Canvas")
+.selectAll("rect")
+.data(dataArray, function(currentDataPoint) {
+    console.log(currentDataPoint);
+return currentDataPoint.artist;
+});
+
+// update
+rects
+.transition().duration(1000)
+.attr("y",function(d){
+    return d.value;}
+.attr("width", 100)
+.attr("height", function (d){
+    return d.value;})
+  );
+
+// enter
+rectangles.enter().append("rect")
+.attr("class", "myrect")
+.attr("x", function(d){
+    return d.value *10;
+})
+.attr("y",100)
+.attr("width", 10)
+.transition()
+.duration(1000)
+
+.attr("height",function(d){
+    return d.value;
+});
+
+// exit
+rectangles.exit()
+.transition().duration(1000)
+.attr("height", 0)
+.remove();
+
+};
+
+drawCircles(Men);
+
+  
+
+    </script>
+
+  </body>
