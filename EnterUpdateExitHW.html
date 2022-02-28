@@ -109,11 +109,14 @@ rectangles.enter().append("rect")
     return i * 30 + 20;})
 .attr("x", 100)
 .attr("height", 10)
-.attr("width",function(d){
-    return d.value *10;}) 
-.attr("fill", function(d){ return d.color;})
 .transition()
 .duration(1000)
+.attr("width",function(d){
+    return d.value *10;}) 
+
+
+.attr("fill", function(d){ return d.color;})
+
 
 
 
