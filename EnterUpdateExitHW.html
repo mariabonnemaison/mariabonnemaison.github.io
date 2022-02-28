@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1 id="title">Most Streamed Artists on Spotify</h1>
-    <svg id="Canvas"> </svg>
+    <svg id="Canvas" style= "height: 500px; Width:1000px"> </svg>
     
     <script>
 
@@ -79,39 +79,52 @@ return currentDataPoint.artist;
 });
 
 // update
-rects
+rectangles
 .transition().duration(1000)
-.attr("y",function(d){
-    return d.value;}
-.attr("width", 100)
-.attr("height", function (d){
-    return d.value;})
-  );
+.attr("x", 100)
+  .attr("y",function(d){
+    return d.value *10;})
+  .attr("height", 10)
+  .attr("width",function(d){
+    return d.value*10;
+});
+
+
 
 // enter
 rectangles.enter().append("rect")
 .attr("class", "myrect")
-.attr("x", function(d){
-    return d.value *10;
-})
-.attr("y",100)
-.attr("width", 10)
+.attr("y",function(d){
+    return d.value *10;})
+.attr("x", 100)
+.attr("height", 10)
 .transition()
 .duration(1000)
 
-.attr("height",function(d){
-    return d.value;
+.attr("width",function(d){
+    return d.value *10;
 });
 
 // exit
-rectangles.exit()
-.transition().duration(1000)
-.attr("height", 0)
-.remove();
+ rectangles.exit()
+.transition()
+.duration(1000)
+.attr("y", function(d){
+    return d.value *10 ;
+})
+.attr("width", function(d){
+    return d.value *10;})
+  .remove()
+  .style("color","pink")
+
+
 
 };
 
 drawrect(Men);
+
+
+
 
   
 
