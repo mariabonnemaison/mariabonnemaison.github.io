@@ -15,58 +15,68 @@
        var Men= [
             {
                 artist:"Drake",
-                value: 45
+                value: 45,
+                color: "cornflowerblue"
             },
             {
               artist: "Ed Sheeran",
-              value:34
+              value:34,
+              color: "cornflowerblue"
 
             },
             {
               artist: "Bad Bunny",
-              value: 	32
+              value: 	32,
+              color: "cornflowerblue"
             },
             {
               artist: "The Weeknd",
-              value: 30
+              value: 30,
+              color: "cornflowerblue"
             },
             {
               artist: "justin Bieber",
-              value: 29
+              value: 29,
+              color: "cornflowerblue"
             }
             
         ]
         var women=[
         {
               artist: "Ariana Grande",
-              value: 30
+              value: 30,
+              color: "pink"
             },
             {
               artist: "Taylor Swift",
-              value:27
+              value:27,
+              color: "pink"
             },
             {
               artist: "Billie Eilish",
-              value: 21
+              value: 21,
+              color: "pink"
             },
             {
               artist: "Dua Lipa",
-              value: 19
+              value: 19,
+              color: "pink"
             },
 
             {
               artist: "Rihanna",
-              value: 19
+              value: 19,
+              color: "pink"
             }
         ]
 
 
         d3.select("#title")
         .attr("class","big")
-        .style("color","cornflowerblue");
+        .style("color","blue");
     
         // changes in bulk
-        d3.selectAll(".big").style("color", "cornflowerblue");
+        d3.selectAll(".big").style("color", "Black");
 
 function drawrect(dataArray){
 
@@ -87,35 +97,38 @@ rectangles
   .attr("height", 10)
   .attr("width",function(d){
     return d.value*10;
-});
+})
+
 
 
 
 // enter
 rectangles.enter().append("rect")
 .attr("class", "myrect")
-.attr("y",function(d){
-    return d.value *10;})
+.attr("y",function(d, i){
+    return i * 30 + 20;})
 .attr("x", 100)
 .attr("height", 10)
+.attr("width",function(d){
+    return d.value *10;}) 
+.attr("fill", function(d){ return d.color;})
 .transition()
 .duration(1000)
 
-.attr("width",function(d){
-    return d.value *10;
-});
+
 
 // exit
  rectangles.exit()
 .transition()
 .duration(1000)
-.attr("y", function(d){
-    return d.value *10 ;
-})
+.remove()
+.attr("y",function(d, i){
+    return i * 30 + 20;})
 .attr("width", function(d){
     return d.value *10;})
-  .remove()
-  .style("color","pink")
+
+  
+  
 
 
 
