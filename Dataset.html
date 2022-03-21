@@ -2,14 +2,30 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <script src="https://d3js.org/d3.v7.min.js"></script>
         <title>Headlines Dataset</title>
         <h1>A million Headlines Dataset</h1>
         
     </head>
     <body>
-        <h3>This Dataset was extracted from ABC news. It includes the date of publication and headlines from 2003-2020</h3>
-        <h3>With this dataset I would make a timeline over the past decade that shows how the media (ABC) reports stories over time.</h3>
-        <h3> It would be a good idea to find if other media outlets have headlines data availbale too, to compare how different publications report certain topics.</h3>
-        <h3>Overall, the visualizations would highligth trends in stories along with a timeline to give context of these events. (i.e, presidential elections, global emergencies, olympics coverage, etc.)</h3>
+        <p>This Dataset was extracted from ABC news. It includes the date of publication and headlines from 2003-2020</p>
+        <p>With this dataset I would make a timeline over the past decade that shows how the media (ABC) reports stories over time.</p>
+        <p>It would be a good idea to find if other media outlets have headlines data availbale too, to compare how different
+        <p>publications report certain topics. Overall, the visualizations would highligth trends in stories along with a timeline</p>
+        <p>to give context of these events.(i.e, presidential elections, global emergencies, olympics coverage, etc.)</p>
         <a href="https://www.kaggle.com/therohk/million-headlines">Kaggle Dataset</a>
+
+        <div> </div>
+        <div>
+            <p>Update: I found APIs from The New York Times and AP News. From what I understand, NYT will give me full access to search articles, but AP News has various pricing plans that restrict access.</p>
+        </div>
+
+        <script>
+            d3.csv("abcnews.csv")
+              .then(function(data) {
+                console.log(data);
+              });
+              var url="https//api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq={pub_date}&api-key=WFpefwGj2IcZZvIgnFV9Rm58Gtf91xnt";
+              var url = "https://api.ap.org/media/v/content/search?q=type:(text+OR+video)+AND+versioncreated:[2017-01-19+TO+2018-01-22]&apikey={apikey}";
+          </script>
     </body>
