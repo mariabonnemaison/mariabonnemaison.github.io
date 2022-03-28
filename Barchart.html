@@ -27,7 +27,19 @@
         var margin = {top: 20, right: 20, bottom: 50, left: 100};
         var chartWidth = width - margin.left - margin.right;
         var chartHeight= height - margin.top - margin.bottom;
-            
+        
+        function generateRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+var randomColor=generateRandomColor();//"#F10531"
+        
+    
         var domainValues= d3.range(1, dataMax + 1);
 
 
@@ -88,11 +100,33 @@
             .transition().duration(frequency / 2)
             .call(yAxis);
 
-            var xAxis = d3.axisBottom(x);
+            var xAxis = d3.axisBottom(x)
             svg.select("#x")
             .attr("transform", "translate(0, " + (chartHeight + margin.top) + ")")
             .transition().duration(frequency / 2)
-            .call(xAxis);
+            .call(xAxis)
+            
+            var xAxis = d3.axisBottom(x)
+            .tickFormat(function(d) {
+    var dataPoint = data[d - 1];
+    if (dataPoint) {
+      var time = dataPoint.timestamp;
+      var diff = new Date() - time;
+      var secondsAgo = Math.round(diff / 1000);
+      if (secondsAgo === 0) {
+        return "Now";
+      }
+      else {
+        var word = secondsAgo === 1 ? "second" : "seconds";
+        return secondsAgo + " " + word + " ago";
+      }
+    }
+    else {
+      return "";
+    }
+  });
+            
+            
 
             function zeroState(selection) {
                 selection
@@ -122,7 +156,9 @@
                 .attr("y", function(d){
                     return y(d.users);
                 
-                });
+                })
+                .attr("fill", randomColor);
+                
 
                 // Updating bars
                 bars
@@ -136,13 +172,17 @@
                 .attr("y", function(d){
                     return y(d.users);
 
-                });
+
+                })
+                .attr("fill", "rebeccapurple");
+                
                 
                 // Exiting Bars     
                 bars.exit()
                 .transition().duration(frequency / 2)
                 .call(zeroState)
                 .remove();
+                
                 
 
 
