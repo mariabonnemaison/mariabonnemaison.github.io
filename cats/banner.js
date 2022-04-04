@@ -1,12 +1,12 @@
-var url = "https://api.thecatapi.com/v1/images/search";
-d3.json(url)
-  .then(function(data) {
+// var url = "https://api.thecatapi.com/v1/images/search";
+// d3.json(url)
+//   .then(function(data) {
 
-    d3.select("#banner")
-      .style("background-image", "url('" + data[0].url + "')")
+//     d3.select("#banner")
+//       .style("background-image", "url('" + data[0].url + "')")
     
 
-  });
+//   });
 
   var bannerPosition = d3.scaleLinear()
   .domain ([ 0, window.innerHeight])

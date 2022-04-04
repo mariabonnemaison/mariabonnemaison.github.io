@@ -1,30 +1,53 @@
 body {
-    font-family: "Comic Sans MS";
+    
     margin: 0;
+    background-color: LightBlue;
+    
 }
 
 #banner {
-    background-color: #00cc00;
-    background-image: url(https://cdn2.thecatapi.com/images/8k6.jpg);
+    background-color: royalblue;
+    background-image: url(./abc\ news.jpeg);
     background-position: 50% 100%;
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
-    padding: 20vh 20px; /*(20vh) Percent of the height of screen */
+    padding: 30vh 30px;/*(20vh) Percent of the height of screen */
     text-align: center;
+    color: white;
+    font-family: "Times New Roman", "Times", serif;
 
+}
+
+.headline {
+  margin: 50px 60px 20px 80px;
+  font-size: 1.5em;
+  line-height: 3vh;
+  text-align: center;
+}
+
+.subhead{
+  margin: 50px 60px 10px 80px;
+  font-size: 1em;
+  line-height: 3vh;
+  text-align: center;
 }
 .section {
     display: flex;
-    padding: 50px;
+    padding: 30px 60px 20px 80px;
   }
   
-  .section p {
-    flex: 1;
+  p { 
+    margin: 50px 350px 20px 350px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3em;
+  line-height: 5vh;
+  text-align: left;
+  color: rgb(59, 59, 59);
   }
   
   .section svg {
     border: 1px solid red;
-    flex: 2;
+    flex: 1;
     height: 300px;
     margin: 20px;
   }
