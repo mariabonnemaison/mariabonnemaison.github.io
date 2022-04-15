@@ -19,18 +19,32 @@
       
 <script>
 
+
+
+
         // Load Data
+
             d3.csv("./abcnews.csv")
               .then(function(data) {
-                console.log(data);
-              });
-
-            var width = window.innerWidth;
+                var width = window.innerWidth;
+                data.forEach(function(d) {
+                    var t = d.publish_date;
+                    d.publish_date = new Date(t.slice(0, 4) + "/" + t.slice(4, 6) + "/01" );
+                  });
+                
+            
+                var barData = Array.from(d3.group(data, d => d.publish_date), ([key, value]) => ({date: key, articles: value.length}));
+                console.log(barData[0]);
             var height = window.innerHeight;
             var array = [];
             var margin = {top: 20, right: 20, bottom: 50, left: 100};
             var chartWidth = width - margin.left - margin.right;
             var chartHeight= height - margin.top - margin.bottom;
+
+            var dataMax= d3.max(data, function(d){
+                return d.publish_date;
+            });
+
             
           //  Barchart SVG
             var svg= d3.select("#barchart")
@@ -38,31 +52,25 @@
             .attr("height", height)
 
             var barHeight=d3.scaleLinear()
-            .domain([0,max])
+            .domain([0,dataMax])
             .range([0,chartHeight]);
 
-            var barWidth = width / dataMax;
+            var barWidth = chartWidth / data.length;
 
 
             var y= d3.scaleLinear()
-                .domain([0, max])
+                .domain([0, dataMax])
                 .range([margin.top + chartHeight, margin.top]);
 
                 var Dates = d3.max(data, function(d, i) {
                 return d.publish_date;
               });
-              var x = d3.scaleLinear()
-                .range([0, 300])
-                .domain([0, Dates]);
-                 
-            var dataMax= d3.max(data, function(d){
-                return d.value;
-            });
 
-
-            
-            function fetchData(data) {
-
+              var timeExtent = d3.extent(data, function(d) {  return d.publish_date;});
+              
+              var x = d3.scaleTime()  
+              .domain(timeExtent) 
+               .range([margin.left, margin.left + chartWidth]);
            
             // Data Binding
             var bars = svg.select("#shapes").selectAll(".bar")
@@ -106,10 +114,16 @@
               .call(zeroState)
               .remove();
 
-            };
+            });
             
+
     
-fetchData(data);
+
+
+              
+
+            
+
         
               
           </script>
