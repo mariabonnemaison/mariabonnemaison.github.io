@@ -7,7 +7,7 @@
     <style>
       body {
         margin: 0;
-        background-color: #393939;
+        background-color: black;
       }
 
 .headline{
@@ -30,6 +30,10 @@
   position: absolute;
   background-color: antiquewhite;
   border: 1px;
+}
+
+.bar:hover {
+  fill: #828282;
 }
     </style>
 
@@ -84,7 +88,10 @@
             .domain([0, maxArticles])
             .range([0, chartHeight]);
 
-          var barWidth = chartWidth / data.length;
+          
+          
+          
+          
 
           var y = d3.scaleLinear()
               .domain([0, maxArticles])
@@ -97,10 +104,13 @@
           var x = d3.scaleTime()
             .domain(timeExtent)
             .range([margin.left, margin.left + chartWidth]);
+            
+
+            var barWidth =  chartWidth / data.length;
            
 
   
-            
+            // yAxis
             var yAxis = d3.axisLeft(y);
               svg.select("#y")
               .attr("transform", "translate(" + margin.left + ", 0)")
@@ -112,6 +122,7 @@
               svg.select("path")
                 .style("opacity", 0);
 
+                // xaxis
               var xAxis = d3.axisBottom(x);
               svg.select("#x")
                 .attr("transform", "translate(0, " + (chartHeight + margin.top) + ")")
@@ -144,7 +155,7 @@
             })
             .attr("height", 0)
             .attr("y", margin.top + chartHeight)
-            .attr("fill", "#AA8002")
+            .attr("fill", "royalblue")
             .transition()
               .attr("height", function(d) {
                 return barHeight(d.articles);
@@ -158,11 +169,9 @@
               })
 
             });
-
+// Tooltip
     d3.select("#shapes")
   .on("mouseover", function(d) {
-    d3.selectAll(".bar")
-    .style('opacity', 0.5)
     d3.select("#tooltip")
       .style("display", "block")
       .style("top", event.pageY + 20 + "px")
@@ -170,8 +179,6 @@
       .html("value: " + d.articles)
   })
       .on("mouseout", function() {
-        d3.selectAll(".bar")
-    .style('opacity', 1)
     d3.select("#tooltip")
       .style("display", "none");
       
