@@ -1,134 +1,183 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-        <title>Final Project</title>
-    </head>
-    <body> 
-      <p style= "width: 900px">I'm using the code from the barhcarts we made in class. The only thing I've been able to do is load the data, but I'm having trouble binding it.
-         My goal for now is to have a simple barchart that has the x axis show years, and y axis show the number of headlines posted that year. 
-         To do this, I'm assuming I have to filter data by year, and then quanitfy how many headlines were posted that year.
-         Once I have that, I can play around with doing more data analysis and looking at each individual year and separating by month.
-        Alternatively, I'm thinking this might visually look better as a line chart, but I don't know how different that is to making bars! </p>
-      <svg id="barchart">
-        <g id="shapes"></g>
-        <g id="x"></g>
-        <g id="y"></g>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Final Project</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #393939;
+      }
+
+.headline{
+  font-family: Georgia;
+  color:white;
+  font-size:40px;
+  margin-left:1in;
+  margin-top:1in;
+}
+.subhead{
+  font-family: Georgia;
+  color:white;
+  margin-left:1in;
+  
+  
+}
+
+      #tooltip {
+  display: none;
+  position: absolute;
+  background-color: antiquewhite;
+  border: 1px;
+}
+    </style>
+
+    <h1 class="headline">One Million Headlines from ABC News</h1>
+    <h3 class="subhead">By: Maria Bonnemaison</h3>
+  </head>
+  <body>
+
+    
+    <svg id="barchart">
+      <g id="shapes"></g>
+      <g id="x"></g>
+      <g id="y"></g>
     </svg>
+    <div id="tooltip"></div>
+
+    <script>
+
+      // Declare any variables that do no rely
+      // specifically on the loaded data
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      var margin = {top: 20, right: 70, bottom: 50, left: 70};
+      var chartWidth = width - margin.left - margin.right;
+      var chartHeight= height - margin.top - margin.bottom;
+      var animateDuration= 1000;
+      var animateDelay= 20;
+
+
       
-<script>
 
+      var svg= d3.select("#barchart")
+        .attr("width", width)
+        .attr("height", height);
 
+      // Load Data
+      d3.json("./abcnews-monthly.json")
+        .then(function(data) {
 
-
-        // Load Data
-
-            d3.csv("./abcnews.csv")
-              .then(function(data) {
-                var width = window.innerWidth;
-                data.forEach(function(d) {
-                    var t = d.publish_date;
-                    d.publish_date = new Date(t.slice(0, 4) + "/" + t.slice(4, 6) + "/01" );
-                  });
-                
-            
-                var barData = Array.from(d3.group(data, d => d.publish_date), ([key, value]) => ({date: key, articles: value.length}));
-                console.log(barData[0]);
-            var height = window.innerHeight;
-            var array = [];
-            var margin = {top: 20, right: 20, bottom: 50, left: 100};
-            var chartWidth = width - margin.left - margin.right;
-            var chartHeight= height - margin.top - margin.bottom;
-
-            var dataMax= d3.max(data, function(d){
-                return d.publish_date;
-            });
-
-            
-          //  Barchart SVG
-            var svg= d3.select("#barchart")
-            .attr("width", width)
-            .attr("height", height)
-
-            var barHeight=d3.scaleLinear()
-            .domain([0,dataMax])
-            .range([0,chartHeight]);
-
-            var barWidth = chartWidth / data.length;
-
-
-            var y= d3.scaleLinear()
-                .domain([0, dataMax])
-                .range([margin.top + chartHeight, margin.top]);
-
-                var Dates = d3.max(data, function(d, i) {
-                return d.publish_date;
-              });
-
-              var timeExtent = d3.extent(data, function(d) {  return d.publish_date;});
-              
-              var x = d3.scaleTime()  
-              .domain(timeExtent) 
-               .range([margin.left, margin.left + chartWidth]);
-           
-            // Data Binding
-            var bars = svg.select("#shapes").selectAll(".bar")
-            .data(data, function(d){
-            return d.value;
+          // turn "date" column into JavaScript Dates
+          data.forEach(function(d) {
+            d.date = new Date(d.date);
           });
 
+          console.log(data);
+
+          var maxArticles = d3.max(data, function(d){
+            return d.articles;
+          });
+
+          var barHeight = d3.scaleLinear()
+            .domain([0, maxArticles])
+            .range([0, chartHeight]);
+
+          var barWidth = chartWidth / data.length;
+
+          var y = d3.scaleLinear()
+              .domain([0, maxArticles])
+              .range([margin.top + chartHeight, margin.top]);
+
+          var timeExtent = d3.extent(data, function(d) {
+            return d.date;
+          });
+
+          var x = d3.scaleTime()
+            .domain(timeExtent)
+            .range([margin.left, margin.left + chartWidth]);
+           
+
+  
             
+            var yAxis = d3.axisLeft(y);
+              svg.select("#y")
+              .attr("transform", "translate(" + margin.left + ", 0)")
+              .transition().duration(1000)
+              .style("font-family", "Georgia")
+              .style("font-size", "20px")
+              .style("color", "white")
+              .call(yAxis)
+              svg.select("path")
+                .style("opacity", 0);
+
+              var xAxis = d3.axisBottom(x);
+              svg.select("#x")
+                .attr("transform", "translate(0, " + (chartHeight + margin.top) + ")")
+                .transition()
+                .duration(1000)
+                .delay (function(d,i){
+                return i * 1000})
+                .style("font-family", "Georgia")
+                .style("font-size", "20px")
+                .style("color", "white")
+                .call(xAxis);
+                svg.select("path")
+                .style("opacity", 0);
+                
+                
+
+          // Data Binding
+          var bars = svg.select("#shapes")
+            .selectAll(".bar")
+            .data(data, function(d){
+              return d.value;
+            });
+
           // Entering Bars
-              bars.enter().append("rect")
-              .attr("class", "bar")
-              .attr("width", barWidth)
-              .attr("x", function(d) {
-                return x(d.date)
-              .attr("height", barHeight)
+          bars.enter().append("rect")
+            .attr("class", "bar")
+            .attr("width", barWidth)
+            .attr("x", function(d) {
+              return x(d.date);
+            })
+            .attr("height", 0)
+            .attr("y", margin.top + chartHeight)
+            .attr("fill", "#AA8002")
+            .transition()
+              .attr("height", function(d) {
+                return barHeight(d.articles);
+              })
               .attr("y", function(d) {
-                var h = barHeight(d);
-                return height - h;
+                return y(d.articles);
               })
-              .call(zeroState)
-              .attr("fill", "red")
-            });
-            
-
-
-            // Updating Bars
-            bars
-              .attr("x", function(d, i) {
-                return x(i + 1);
+              .duration (animateDuration)
+              .delay (function(d,i){
+                return i * animateDelay
               })
-              .attr("height", barHeight)
-              .attr("y", function(d, i) {
-              var h = barHeight(d);
-              return height - h;
-        
-              });
-              
-
-            // Exiting Bars
-            bars.exit()
-              .call(zeroState)
-              .remove();
 
             });
-            
 
+    d3.select("#shapes")
+  .on("mouseover", function(d) {
+    d3.selectAll(".bar")
+    .style('opacity', 0.5)
+    d3.select("#tooltip")
+      .style("display", "block")
+      .style("top", event.pageY + 20 + "px")
+      .style("left", event.pageX + 20 + "px")
+      .html("value: " + d.articles)
+  })
+      .on("mouseout", function() {
+        d3.selectAll(".bar")
+    .style('opacity', 1)
+    d3.select("#tooltip")
+      .style("display", "none");
+      
+    });
     
 
-
-              
-
-            
-
-        
-              
-          </script>
-    </body>
-    
-
-    
+    </script>
+  </body>
 </html>

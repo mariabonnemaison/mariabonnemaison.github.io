@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <title>Final Project</title>
+    </head>
+    <body> 
+      <p style= "width: 900px">I'm using the code from the barhcarts we made in class. The only thing I've been able to do is load the data, but I'm having trouble binding it.
+         My goal for now is to have a simple barchart that has the x axis show years, and y axis show the number of headlines posted that year. 
+         To do this, I'm assuming I have to filter data by year, and then quanitfy how many headlines were posted that year.
+         Once I have that, I can play around with doing more data analysis and looking at each individual year and separating by month.
+        Alternatively, I'm thinking this might visually look better as a line chart, but I don't know how different that is to making bars! </p>
+      <svg id="barchart">
+        <g id="shapes"></g>
+        <g id="x"></g>
+        <g id="y"></g>
+    </svg>
+      
+<script>
+
+
+
+
+        // Load Data
+
+            d3.csv("./abcnews.csv")
+              .then(function(data) {
+                var width = window.innerWidth;
+                data.forEach(function(d) {
+                    var t = d.publish_date;
+                    d.publish_date = new Date(t.slice(0, 4) + "/" + t.slice(4, 6) + "/01" );
+                  });
+                
+            
+                var barData = Array.from(d3.group(data, d => d.publish_date), ([key, value]) => ({date: key, articles: value.length}));
+                console.log(barData[0]);
+            var height = window.innerHeight;
+            var array = [];
+            var margin = {top: 20, right: 20, bottom: 50, left: 20};
+            var chartWidth = width - margin.left - margin.right;
+            var chartHeight= height - margin.top - margin.bottom;
+
+            var dataMax= d3.max(data, function(d){
+                return d.publish_date;
+            });
+
+            
+          //  Barchart SVG
+            var svg= d3.select("#barchart")
+            .attr("width", width)
+            .attr("height", height)
+
+            var barHeight=d3.scaleLinear()
+            .domain([0,dataMax])
+            .range([0,chartHeight]);
+
+            var barWidth = chartWidth / data.length;
+
+
+            var y= d3.scaleLinear()
+                .domain([0, dataMax])
+                .range([margin.top + chartHeight, margin.top]);
+
+                var Dates = d3.max(data, function(d, i) {
+                return d.publish_date;
+              });
+
+              var timeExtent = d3.extent(data, function(d) {  return d.publish_date;});
+              
+              var x = d3.scaleTime()  
+              .domain(timeExtent) 
+               .range([margin.left, margin.left + chartWidth]);
+           
+            // Data Binding
+            var bars = svg.select("#shapes").selectAll(".bar")
+            .data(data, function(d){
+            return d.value;
+          });
+
+            
+          // Entering Bars
+              bars.enter().append("rect")
+              .attr("class", "bar")
+              .attr("width", barWidth)
+              .attr("x", function(d) {
+                return x(d.date)
+              .attr("height", barHeight)
+              .attr("y", function(d) {
+                var h = barHeight(d);
+                return height - h;
+              })
+              .call(zeroState)
+              .attr("fill", "red")
+            });
+            
+
+
+            // Updating Bars
+            bars
+              .attr("x", function(d, i) {
+                return x(i + 1);
+              })
+              .attr("height", barHeight)
+              .attr("y", function(d, i) {
+              var h = barHeight(d);
+              return height - h;
+        
+              });
+              
+
+            // Exiting Bars
+            bars.exit()
+              .call(zeroState)
+              .remove();
+
+            });
+            
+
+    
+
+
+              
+
+            
+
+        
+              
+          </script>
+    </body>
+    
+
+    
+</html>
