@@ -21,6 +21,7 @@
   font-family: Georgia;
   color:white;
   margin-left:1in;
+ 
   
   
 }
@@ -35,6 +36,20 @@
 .bar:hover {
   fill: #828282;
 }
+
+#popup{
+  margin: 50px 20px 0 200px;
+  font-family: "Roboto";
+  font-size: 15px;
+  position:relative;
+ 
+  
+}
+span{
+  padding: 4px;
+}
+
+
     </style>
 
     <h1 class="headline">One Million Headlines from ABC News</h1>
@@ -42,13 +57,15 @@
   </head>
   <body>
 
-    
+    <p id="popup"><span id="span">popup</span><p>
+
     <svg id="barchart">
       <g id="shapes"></g>
       <g id="x"></g>
       <g id="y"></g>
     </svg>
     <div id="tooltip"></div>
+   
 
     <script>
 
@@ -88,10 +105,7 @@
             .domain([0, maxArticles])
             .range([0, chartHeight]);
 
-          
-          
-          
-          
+  
 
           var y = d3.scaleLinear()
               .domain([0, maxArticles])
@@ -183,7 +197,20 @@
       .style("display", "none");
       
     });
+
+d3.select("#popup")
+.transition()
+.duration(1000)
+.delay(1000)
+d3.select("#span")
+.transition()
+.duration(1000)
+.delay(1000*2)
+.style("background-color", "lightblue");
+
+
     
+
 
     </script>
   </body>
