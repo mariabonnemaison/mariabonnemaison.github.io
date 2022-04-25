@@ -5,18 +5,18 @@ body {
     
 }
 
-#banner {
+/* #banner {
     background-color: royalblue;
     background-image: url(./abc\ news.jpeg);
     background-position: 50% 100%;
     background-size: 100%;
     background-repeat: no-repeat;
     padding: 30vh 30px;/*(20vh) Percent of the height of screen */
-    text-align: center;
+    /* text-align: center;
     color: white;
     font-family: "Times New Roman", "Times", serif;
 
-}
+} */
 
 .headline {
   margin: 50px 60px 20px 80px;
