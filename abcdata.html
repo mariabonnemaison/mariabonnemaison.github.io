@@ -3,70 +3,42 @@
   <head>
     <meta charset="utf-8" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <title>Final Project</title>
-    <style>
-      body {
-        margin: 0;
-        background-color: black;
-      }
-
-.headline{
-  font-family: Georgia;
-  color:white;
-  font-size:40px;
-  margin-left:1in;
-  margin-top:1in;
-}
-.subhead{
-  font-family: Georgia;
-  color:white;
-  margin-left:1in;
- 
-  
-  
-}
-
-      #tooltip {
-  display: none;
-  position: absolute;
-  background-color: antiquewhite;
-  border: 1px;
-}
-
-.bar:hover {
-  fill: #828282;
-}
-
-#popup{
-  margin: 50px 20px 0 200px;
-  font-family: "Roboto";
-  font-size: 15px;
-  position:relative;
- 
-  
-}
-span{
-  padding: 4px;
-}
-
-
-    </style>
-
+    <link rel="stylesheet" href="./ABCstyle.css"/>
+    <title>ABC Headlines</title>
+    
+    <div id="banner">
+    
+    
+    </div>
     <h1 class="headline">One Million Headlines from ABC News</h1>
-    <h3 class="subhead">By: Maria Bonnemaison</h3>
+    <h2 class="subhead"> How nearly two decades of headlines highlight important moments in recent history.</h2>
+    <h3 class="byline">By: Maria Bonnemaison</h3>
   </head>
   <body>
 
-    <p id="popup"><span id="span">popup</span><p>
+    <p> ABC News is a national news outlets founded in.... More info about ABC news. ABC is one of the largest news outlets in the nation covering a range a topics from politics, environment, culture and breaking news.
+      A dataset published by (name) lists every single headline published on ABC from 2003 to 2020. These headlines provide a look into our past, and how topics are most reported on in the media. For the purpose of this Data visualization, we'll take a close look at how ABC has reported numerous topics over time and how trends indiciate critical events in society.
+    </p>
 
-    <svg id="barchart">
+    <p> The data begins in March 2003. During this time, Former President George W.Bush, declares war on Iraq on March 19, 2003. “At this hour, American and coalition forces are in the early stages of military operations to disarm Iraq, to free its people and to defend the world from grave danger.”
+    </p>
+
+    
+<!-- SVG -->
+    
+
+  <svg id="barchart">
       <g id="shapes"></g>
       <g id="x"></g>
       <g id="y"></g>
     </svg>
-    <div id="tooltip"></div>
-   
 
+    <p> The data begins in March 2003. During this time, Former President George W.Bush, declares war on Iraq on March 19, 2003. “At this hour, American and coalition forces are in the early stages of military operations to disarm Iraq, to free its people and to defend the world from grave danger.”
+    </p>
+    <div id="tooltip"></div>
+    <div id="comment"></div>
+   
+<!-- D3 BarChart -->
     <script>
 
       // Declare any variables that do no rely
@@ -77,7 +49,9 @@ span{
       var chartWidth = width - margin.left - margin.right;
       var chartHeight= height - margin.top - margin.bottom;
       var animateDuration= 1000;
-      var animateDelay= 20;
+      var animateDelay= 10;
+      var formatDate=  d3.timeFormat("%B %Y");
+      var formatNumber= d3.format(",")
 
 
       
@@ -120,7 +94,7 @@ span{
             .range([margin.left, margin.left + chartWidth]);
             
 
-            var barWidth =  chartWidth / data.length;
+            var barWidth =  Math.ceil(chartWidth / data.length);
            
 
   
@@ -129,8 +103,9 @@ span{
               svg.select("#y")
               .attr("transform", "translate(" + margin.left + ", 0)")
               .transition().duration(1000)
-              .style("font-family", "Georgia")
+              .style("font-family", "Roboto")
               .style("font-size", "20px")
+              .style("font-weight", "200")
               .style("color", "white")
               .call(yAxis)
               svg.select("path")
@@ -144,8 +119,9 @@ span{
                 .duration(1000)
                 .delay (function(d,i){
                 return i * 1000})
-                .style("font-family", "Georgia")
+                .style("font-family", "Roboto")
                 .style("font-size", "20px")
+                .style("font-weight", "200")
                 .style("color", "white")
                 .call(xAxis);
                 svg.select("path")
@@ -161,7 +137,7 @@ span{
             });
 
           // Entering Bars
-          bars.enter().append("rect")
+        var barEnter=bars.enter().append("rect")
             .attr("class", "bar")
             .attr("width", barWidth)
             .attr("x", function(d) {
@@ -181,22 +157,33 @@ span{
               .delay (function(d,i){
                 return i * animateDelay
               })
-
-            });
+            
+             
+                
+              
+   
+           
 // Tooltip
-    d3.select("#shapes")
-  .on("mouseover", function(d) {
+bars.merge(barEnter)
+  .on("mouseover", function(event, d) {
     d3.select("#tooltip")
       .style("display", "block")
+      
       .style("top", event.pageY + 20 + "px")
       .style("left", event.pageX + 20 + "px")
-      .html("value: " + d.articles)
+      .html( formatDate(d.date) + "</br>"+
+        formatNumber(d.articles) + " headlines")
   })
       .on("mouseout", function() {
     d3.select("#tooltip")
-      .style("display", "none");
+      .style("display", "none")
+     
+
       
     });
+
+
+  });
 
 d3.select("#popup")
 .transition()
@@ -213,5 +200,6 @@ d3.select("#span")
 
 
     </script>
+    <script src="./Barbanner.js"></script>
   </body>
 </html>

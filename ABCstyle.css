@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    background-color: rgb(27, 27, 27);
+  }
+
+.headline{
+margin-bottom:20px;
+margin-top: 100px;
+font-family: 'Roboto';
+color:white;
+font-size:40px;
+text-align: center;
+font-size: 3em;
+}
+
+
+.subhead{
+  margin-bottom: 15px;
+  font-family: 'Roboto';
+  color:white;
+  text-align: center;
+  font-weight: 500;
+}
+
+.byline{
+margin:  5px;
+font-family: 'Roboto';
+color:white;
+text-align: center;
+font-weight: 300;
+
+}
+
+p { 
+  margin:  5% 25%;
+    font-family: 'Georgia', Times, serif;
+    font-size: 1.2em;
+  line-height: 5vh;
+  text-align: left;
+  color: whitesmoke;
+  }
+
+  #tooltip {
+display: none;
+position: absolute;
+background-color: rgb(188, 196, 228);
+border: 1px;
+padding:5px;
+font-family: "Roboto";
+font-weight: 320;
+}
+
+.bar:hover {
+fill: rgb(153, 165, 207);
+}
+
+#popup{
+margin: 50px 20px 0 200px;
+font-family: "Roboto";
+font-size: 15px;
+position:relative;
+
+
+}
+span{
+padding: 4px;
+}
+
+#banner {
+  /* background-color: royalblue; */
+  background-image: url(./abc\ news.jpeg);
+  background-position: 50% 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding: 30vh 30px;/*(20vh) Percent of the height of screen */
+  text-align: center;
+  color: white;
+  font-family: "Times New Roman", "Times", serif;
+}
