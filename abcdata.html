@@ -21,7 +21,7 @@
   </head>
   <body>
 
-    <p> ABC News is a national news outlets founded on June 15, 1945. The publication is currently the news division of Walt Disney's Television ABC Broadcast network. ABC News is one of the largest news outlets in the nation covering a range a topics from politics, environment, culture and breaking news.
+    <p> The Australian Broadcast Corporation is an international news outlet founded on July 1, 1932 in Sydney, Australia. The publication is funded orimarily by direct grants from the Australian government and is administered by a government-appointed board. ABC  is one of the largest news outlets in the nation covering a range a topics from politics, environment, culture and breaking news.
       A dataset published by ROHIT KULKARNI on Kaggle lists every headline published on ABC from 2003 to 2020. These headlines provide a look into our past, and how topics are reported in the media. For the purpose of this Data visualization, we'll take a close look at how ABC has reported numerous topics over time and how trends indiciate critical events in society.
     </p>
 
@@ -52,6 +52,7 @@
  
     <div id="tooltip"></div>
     <div id="comment"></div>
+    <div id="note"></div>
    
 <!-- D3 BarChart -->
     <script>
@@ -183,32 +184,35 @@ bars.merge(barEnter)
   .on("mouseover", function(event, d) {
     d3.select("#tooltip")
       .style("display", "block")
-      
       .style("top", event.pageY + 20 + "px")
       .style("left", event.pageX + 20 + "px")
       .html( formatDate(d.date) + "</br>"+
         formatNumber(d.articles) + " headlines")
+        
+      .html(function() { 
+      if (d.articles == "8923") { return formatDate(d.date) + "</br>"+
+        formatNumber(d.articles) + " headlines" + "<br> " + "Britain threatens to raid ecuador embassy for assange" + "<br> " + "Phelps collects record medal haul" + "<br> " + "Seven dead 48 hurt in venezuelan refinery blast" ; } 
+      else { return formatDate(d.date) + "</br>"+
+        formatNumber(d.articles) + " headlines"; }
+
   })
+  
       .on("mouseout", function() {
     d3.select("#tooltip")
       .style("display", "none")
      
 
       
-    });
+    })
+      
+
+  
+})
+ 
+     
 
 
   });
-
-d3.select("#popup")
-.transition()
-.duration(1000)
-.delay(1000)
-d3.select("#span")
-.transition()
-.duration(1000)
-.delay(1000*2)
-.style("background-color", "lightblue");
 
 
     
