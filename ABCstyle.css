@@ -55,16 +55,20 @@ fill: rgb(153, 165, 207);
 }
 
 #popup{
-margin: 50px 20px 0 200px;
 font-family: "Roboto";
+margin-left: 100px;
 font-size: 15px;
-position:relative;
-
-
+width: fit-content;
+padding:5px;
+font-family: "roboto";
+display:block;
 }
-span{
+
+
+/* span{
 padding: 4px;
-}
+background-color: rgb(188, 196, 228);
+} */
 
 #banner {
   background-color: royalblue;
@@ -77,3 +81,5 @@ padding: 4px;
   color: white;
   font-family: "Times New Roman", "Times", serif;
 }  
+
+  

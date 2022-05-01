@@ -31,7 +31,7 @@
     
     
 <!-- SVG -->
-    
+ <div id="popup"></div>
 
   <svg id="barchart">
       <g id="shapes"></g>
@@ -53,7 +53,7 @@
 
  
     <div id="tooltip"></div>
-    <div id="comment"></div>
+   
     <div id="note"></div>
    
 <!-- D3 BarChart -->
@@ -206,16 +206,19 @@ bars.merge(barEnter)
 
       
     })
-      
-
   
 })
  
-     
-
+d3.select("#popup")
+.transition()
+  .style("background", "rgb(188, 196, 228)")
+  .html("Hover over August 2012 for more details")
+  .duration(2*1000)
+  
 
   });
 
+  
 
     
 
