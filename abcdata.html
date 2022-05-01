@@ -31,7 +31,7 @@
     
     
 <!-- SVG -->
- <div id="popup"></div>
+ <div id="popup"> Hover over August 2012 for more details</div>
 
   <svg id="barchart">
       <g id="shapes"></g>
@@ -212,10 +212,10 @@ bars.merge(barEnter)
 d3.select("#popup")
 .transition()
   .style("background", "rgb(188, 196, 228)")
-  .html("Hover over August 2012 for more details")
-  .duration(2*1000)
+  .duration(4000)
+  .delay(2000)
   
-
+  
   });
 
   
